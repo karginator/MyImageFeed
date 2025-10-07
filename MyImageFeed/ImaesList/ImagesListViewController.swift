@@ -7,6 +7,7 @@ final class ImagesListViewController: UIViewController {
     
     // MARK: - Private Properties
     private let photosName: [String] = Array(0..<20).map{"\($0)"}
+    private let identifierSegueShowSingleImage = "ShowSingleImage"
     
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -26,6 +27,24 @@ final class ImagesListViewController: UIViewController {
 //        tableView.register(ImagesListCell.self, forCellReuseIdentifier: ImagesListCell.reuseIdentifier)
         
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+    }
+    
+    // MARK: - Overrides Method prepare
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == identifierSegueShowSingleImage {
+            guard
+                let viewController = segue.destination as? SingleImageViewController,
+                let indexPath = sender as? IndexPath
+            else {
+                assertionFailure("Invalid segue destination")
+                return
+            }
+            
+            let image = UIImage(named: photosName[indexPath.row])
+            viewController.image = image
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
     }
     
     // MARK: - Public Methods
@@ -54,7 +73,6 @@ extension ImagesListViewController: UITableViewDataSource {
         }
         
         configCell(for: imageListCell, with: indexPath)
-//        imageListCell.addGradientBlurToImage()
         return imageListCell
     }
 }
@@ -63,7 +81,7 @@ extension ImagesListViewController: UITableViewDataSource {
 extension ImagesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Вы нажали на ячейку с индексом \(indexPath.row)")
+        performSegue(withIdentifier: identifierSegueShowSingleImage, sender: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
