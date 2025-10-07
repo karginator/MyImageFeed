@@ -2,6 +2,10 @@ import UIKit
 
 final class SingleImageViewController: UIViewController {
     
+    // MARK: - IB Outlets
+    @IBOutlet weak var backButton: UIButton!
+    
+    
     // MARK: - Public Properties
     var image: UIImage? {
         didSet {
@@ -19,4 +23,8 @@ final class SingleImageViewController: UIViewController {
         imageView.image = image
     }
     
+    // MARK: - IB Actions
+    @IBAction func didSelectBackButton() {
+        dismiss(animated: true, completion: nil)
+    }
 }
