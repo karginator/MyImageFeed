@@ -14,11 +14,15 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vhj-3I-jDB">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <color key="selectedImageTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <tabBarAppearance key="standardAppearance">
                             <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         </tabBarAppearance>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="translucent" value="NO"/>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="XaI-Mf-9xG"/>
@@ -68,21 +72,21 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cuD-cD-bhh" userLabel="Logout Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cuD-cD-bhh" userLabel="Logout Button">
                                 <rect key="frame" x="333" y="163" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Q8c-SS-lSc"/>
                                     <constraint firstAttribute="width" constant="44" id="ynH-ES-bTd"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="logout_button"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="logout_button"/>
                                 <connections>
                                     <action selector="didTapLogoutButton:" destination="SkF-Xh-eLs" eventType="touchUpInside" id="zC0-ft-E5J"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TEe-yY-QIO"/>
-                        <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="TEe-yY-QIO" firstAttribute="trailing" secondItem="cuD-cD-bhh" secondAttribute="trailing" constant="16" id="4ns-RW-FmQ"/>
                             <constraint firstItem="RSa-XS-NVF" firstAttribute="top" secondItem="TEe-yY-QIO" secondAttribute="top" constant="32" id="5id-mg-cxJ"/>
@@ -140,19 +144,19 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31 января 1994" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXN-Pm-Thg" userLabel="Date Label">
-                                                    <rect key="frame" x="24" y="182.33333333333334" width="96" height="15.666666666666657"/>
+                                                    <rect key="frame" x="24" y="182" width="96" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzb-SL-SFR" userLabel="Like Button">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzb-SL-SFR" userLabel="Like Button">
                                                     <rect key="frame" x="333" y="4" width="44" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="44" id="Cqg-TZ-x7o"/>
                                                         <constraint firstAttribute="width" constant="44" id="TOd-tT-oXG"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="like_button_on"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="like_button_on"/>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -228,13 +232,34 @@
                                     <action selector="didSelectBackButton" destination="7lU-3R-kwT" eventType="touchUpInside" id="anb-ie-ynQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AE8-xB-PVV" userLabel="Share Button">
+                                <rect key="frame" x="171.66666666666666" y="751" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="BZL-FS-zXg"/>
+                                    <constraint firstAttribute="height" constant="50" id="T3Q-b1-8aw"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="share_button"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didTapShareButton" destination="7lU-3R-kwT" eventType="touchUpInside" id="0t9-VI-nPG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="08D-jT-nVt"/>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="yjG-sr-xpR" firstAttribute="leading" secondItem="avC-63-Efo" secondAttribute="leading" id="0ca-bc-qPE"/>
                             <constraint firstItem="uTj-RE-MrQ" firstAttribute="leading" secondItem="08D-jT-nVt" secondAttribute="leading" constant="8" id="FDR-5g-deX"/>
+                            <constraint firstAttribute="bottom" secondItem="AE8-xB-PVV" secondAttribute="bottom" constant="51" id="Hse-hT-6AI"/>
                             <constraint firstAttribute="trailing" secondItem="yjG-sr-xpR" secondAttribute="trailing" id="QCB-lV-a9q"/>
+                            <constraint firstItem="AE8-xB-PVV" firstAttribute="centerX" secondItem="08D-jT-nVt" secondAttribute="centerX" id="U6B-kI-vjo"/>
                             <constraint firstItem="uTj-RE-MrQ" firstAttribute="top" secondItem="08D-jT-nVt" secondAttribute="top" constant="8" id="U9Q-0z-uKa"/>
                             <constraint firstItem="yjG-sr-xpR" firstAttribute="top" secondItem="avC-63-Efo" secondAttribute="top" id="Vuu-Ba-oc8"/>
                             <constraint firstAttribute="bottom" secondItem="yjG-sr-xpR" secondAttribute="bottom" id="jbe-12-SIn"/>
@@ -243,13 +268,14 @@
                     <navigationItem key="navigationItem" id="POc-TV-rWI"/>
                     <connections>
                         <outlet property="backButton" destination="uTj-RE-MrQ" id="90b-nq-F9k"/>
-                        <outlet property="imageView" destination="8ze-SD-H7H" id="Z5p-qj-cky"/>
+                        <outlet property="imageView" destination="8ze-SD-H7H" id="KkU-a1-TJA"/>
                         <outlet property="scrollView" destination="yjG-sr-xpR" id="sd9-pN-3ON"/>
+                        <outlet property="shareButton" destination="AE8-xB-PVV" id="WAO-wC-L7r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UDM-pM-SlG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-173.2824427480916" y="-311.26760563380282"/>
+            <point key="canvasLocation" x="-173.91304347826087" y="-311.38392857142856"/>
         </scene>
     </scenes>
     <resources>
@@ -259,6 +285,7 @@
         <image name="like_button_on" width="42" height="42"/>
         <image name="logout_button" width="44" height="44"/>
         <image name="nav_back_button_white" width="24" height="24"/>
+        <image name="share_button" width="22.333333969116211" height="21"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <image name="tab_profile_active" width="30" height="30"/>
     </resources>
