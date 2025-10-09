@@ -3,8 +3,8 @@ import UIKit
 final class SingleImageViewController: UIViewController {
     
     // MARK: - IB Outlets
-    @IBOutlet weak var backButton: UIButton!
-    
+    @IBOutlet private weak var backButton: UIButton!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     // MARK: - Public Properties
     var image: UIImage? {
