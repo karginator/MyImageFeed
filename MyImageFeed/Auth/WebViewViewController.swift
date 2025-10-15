@@ -1,21 +1,21 @@
 import UIKit
 import WebKit
 
-enum WebViewConstants {
-    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-}
-
 final class WebViewViewController: UIViewController {
     
     // MARK: - IB Outlets
     @IBOutlet weak var webView: WKWebView!
     
+    // MARK: - Public Properties
+    weak var delegate: WebViewViewControllerDelegate?
+    
     // MARK: - Overrides Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadAuthView()
         
         webView.navigationDelegate = self
+        
+        loadAuthView()
     }
     
     // MARK: - Private Methods
@@ -34,20 +34,11 @@ final class WebViewViewController: UIViewController {
         let request = URLRequest(url: url)
         webView.load(request)
     }
-    
-    private func code(from navigationAction: WKNavigationAction) -> String? {
-        if
-            let url = navigationAction.request.url,
-            let urlComponents = URLComponents(string: url.absoluteString),
-            urlComponents.path == "/oauth/authorize/native",
-            let items = urlComponents.queryItems,
-            let codeItem = items.first(where: { $0.name == "code"})
-        { return codeItem.value } else { return nil }
-    }
 }
 
 // MARK: - Extension WKNavigationDelegate
 extension WebViewViewController: WKNavigationDelegate {
+    
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -58,4 +49,15 @@ extension WebViewViewController: WKNavigationDelegate {
             decisionHandler(.allow)
         }
     }
+    
+    private func code(from navigationAction: WKNavigationAction) -> String? {
+        if
+            let url = navigationAction.request.url,
+            let urlComponents = URLComponents(string: url.absoluteString),
+            urlComponents.path == "/oauth/authorize/native",
+            let items = urlComponents.queryItems,
+            let codeItem = items.first(where: { $0.name == "code"})
+        { return codeItem.value } else { return nil }
+    }
+    
 }

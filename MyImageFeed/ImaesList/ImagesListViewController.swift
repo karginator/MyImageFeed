@@ -33,9 +33,7 @@ final class ImagesListViewController: UIViewController {
             guard
                 let viewController = segue.destination as? SingleImageViewController,
                 let indexPath = sender as? IndexPath
-            else {
-                preconditionFailure("Invalid segue destination or sender type")
-            }
+            else { preconditionFailure("Invalid segue destination or sender type") }
             
             let image = UIImage(named: photosName[indexPath.row])
             viewController.image = image
