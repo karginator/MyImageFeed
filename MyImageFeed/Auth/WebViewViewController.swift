@@ -2,7 +2,6 @@ import UIKit
 import WebKit
 
 enum WebViewConstants {
-    static let unsplashAuthorizeURLString_test = "https://google.com"
     static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 }
 
@@ -15,14 +14,13 @@ final class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadAuthView()
+        
+        webView.navigationDelegate = self
     }
-
+    
     // MARK: - Private Methods
     private func loadAuthView() {
-        guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
-            print("1")
-            return
-        }
+        guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else { return }
         
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: Constants.accessKae),
@@ -30,15 +28,34 @@ final class WebViewViewController: UIViewController {
             URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "scope", value: Constants.accessScope)
         ]
-                
-        guard let url = urlComponents.url else {
-            print("2")
-            return
-        }
+        
+        guard let url = urlComponents.url else { return }
         
         let request = URLRequest(url: url)
         webView.load(request)
     }
     
-    
+    private func code(from navigationAction: WKNavigationAction) -> String? {
+        if
+            let url = navigationAction.request.url,
+            let urlComponents = URLComponents(string: url.absoluteString),
+            urlComponents.path == "/oauth/authorize/native",
+            let items = urlComponents.queryItems,
+            let codeItem = items.first(where: { $0.name == "code"})
+        { return codeItem.value } else { return nil }
+    }
+}
+
+// MARK: - Extension WKNavigationDelegate
+extension WebViewViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView,
+                 decidePolicyFor navigationAction: WKNavigationAction,
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let code = code(from: navigationAction) {
+            //TODO: process code
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
+    }
 }
