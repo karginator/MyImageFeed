@@ -5,7 +5,7 @@ final class AuthViewController: UIViewController {
     // MARK: - Private Properties
     private let identifierSegueShowWebView = "ShowWebView"
     
-    // MARK: - Overrides Methods
+    // MARK: - Overrides Methods viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         configureBackButton()
