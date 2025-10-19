@@ -3,22 +3,27 @@ import UIKit
 final class AuthViewController: UIViewController {
     
     // MARK: - Private Properties
-    private let identifierSegueShowWebView = "ShowWebView"
+    private let showWebViewSegueIdentifier = "ShowWebView"
     
     // MARK: - Override Methods viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureBackButton()
     }
     
     // MARK: - Override Methods prepare(for segue:)
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == identifierSegueShowWebView {
+        print("prepare_1")
+        if segue.identifier == showWebViewSegueIdentifier {
+            print("prepare_2")
             guard
-                let viewController = segue.destination as? WebViewViewController
+                let webViewViewController = segue.destination as? WebViewViewController
             else { preconditionFailure("Invalid segue destination or sender type") }
-            viewController.delegate = self
+            print("prepare_3")
+            webViewViewController.delegate = self
         } else {
+            print("prepare_4")
             super.prepare(for: segue, sender: sender)
         }
     }
@@ -35,11 +40,12 @@ final class AuthViewController: UIViewController {
 // MARK: - Extension WebViewViewControllerDelegate
 extension AuthViewController: WebViewViewControllerDelegate {
     
-    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+        print("LETS GO: \(code)")
         vc.dismiss(animated: true)
     }
     
-    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        //TODO: process code
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
+        vc.dismiss(animated: true)
     }
 }
