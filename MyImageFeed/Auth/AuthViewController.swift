@@ -2,6 +2,9 @@ import UIKit
 
 final class AuthViewController: UIViewController {
     
+    // MARK: - Public Properties
+    weak var delegate: AuthViewControllerDelegate?
+    
     // MARK: - Private Properties
     private let showWebViewSegueIdentifier = "ShowWebView"
     
@@ -14,16 +17,12 @@ final class AuthViewController: UIViewController {
     
     // MARK: - Override Methods prepare(for segue:)
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepare_1")
         if segue.identifier == showWebViewSegueIdentifier {
-            print("prepare_2")
             guard
                 let webViewViewController = segue.destination as? WebViewViewController
             else { preconditionFailure("Invalid segue destination or sender type") }
-            print("prepare_3")
             webViewViewController.delegate = self
         } else {
-            print("prepare_4")
             super.prepare(for: segue, sender: sender)
         }
     }
@@ -41,11 +40,10 @@ final class AuthViewController: UIViewController {
 extension AuthViewController: WebViewViewControllerDelegate {
     
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        print("LETS GO: \(code)")
-        vc.dismiss(animated: true)
+        dismiss(animated: true)
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        vc.dismiss(animated: true)
+        dismiss(animated: true)
     }
 }
