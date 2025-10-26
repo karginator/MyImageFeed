@@ -58,6 +58,23 @@ final class WebViewViewController: UIViewController {
     }
 }
 
+// MARK: - Extension WKNavigationDelegate
+extension WebViewViewController: WKNavigationDelegate {
+    
+    func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
+        if let code = fetchCode(from: navigationAction) {
+            decisionHandler(.cancel)
+            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+        } else {
+            decisionHandler(.allow)
+        }
+    }
+}
+
 // MARK: - Extension Private Methods
 private extension WebViewViewController {
     
@@ -89,22 +106,5 @@ private extension WebViewViewController {
     func updateProgress() {
         prograssView.progress = Float(webView.estimatedProgress)
         prograssView.isHidden = fabs(webView.estimatedProgress - 1.0) < 0.0001
-    }
-}
-
-// MARK: - Extension WKNavigationDelegate
-extension WebViewViewController: WKNavigationDelegate {
-    
-    func webView(
-        _ webView: WKWebView,
-        decidePolicyFor navigationAction: WKNavigationAction,
-        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
-    ) {
-        if let code = fetchCode(from: navigationAction) {
-            decisionHandler(.cancel)
-            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-        } else {
-            decisionHandler(.allow)
-        }
     }
 }
